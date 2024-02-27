@@ -2,6 +2,7 @@ import { Token } from './Token'
 import { verify, VerifyOptions } from 'jsonwebtoken'
 import { IInternalConfig } from './index'
 import { AxiosInstance } from 'axios'
+import { SocksProxyAgent } from 'socks-proxy-agent'
 
 export class Jwt {
   constructor (private readonly config: IInternalConfig, private readonly request: AxiosInstance) {}
@@ -20,11 +21,25 @@ export class Jwt {
   }
 
   async verify (accessToken: string): Promise<Token> {
-    await this.request.get(`${this.config.prefix}/realms/${this.config.realm}/protocol/openid-connect/userinfo`, {
-      headers: {
-        Authorization: 'Bearer ' + accessToken
-      }
-    })
+
+    if (this.config.socks_enabled) {
+      const agent = new SocksProxyAgent(`socks5://${this.config.socks_url}`);
+      await this.request.get(`${this.config.prefix}/realms/${this.config.realm}/protocol/openid-connect/userinfo`, {
+        headers: {
+          Authorization: 'Bearer ' + accessToken
+        },
+        httpAgent: agent,
+        httpsAgent: agent
+      })
+    }
+    else {
+      await this.request.get(`${this.config.prefix}/realms/${this.config.realm}/protocol/openid-connect/userinfo`, {
+        headers: {
+          Authorization: 'Bearer ' + accessToken
+        }
+      })
+
+    }
 
     return new Token(accessToken)
   }
