@@ -1,4 +1,4 @@
-# keycloak-backend
+# keycloak-backend-socks
 [![NPM version](https://badgen.net/npm/v/keycloak-backend)](https://www.npmjs.com/package/keycloak-backend)
 [![NPM Total Downloads](https://badgen.net/npm/dt/keycloak-backend)](https://www.npmjs.com/package/keycloak-backend)
 [![License](https://badgen.net/npm/license/keycloak-backend)](https://www.npmjs.com/package/keycloak-backend)
