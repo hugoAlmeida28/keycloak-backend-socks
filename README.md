@@ -6,3 +6,5 @@
 Keycloak Node.js minimalist connector for backend services integration. It aims to serve as base for high performance authorization middlewares.
 
 > This is the base version created by "BackendStack21" with an enhancement to support SOCKS proxys.
+
+For configuration and package details, refer to https://github.com/jkyberneees/keycloak-backend.
