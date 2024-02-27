@@ -10,6 +10,8 @@ export interface IExternalConfig {
   password?: string
   client_secret?: string
   is_legacy_endpoint?: boolean
+  socks_enabled?: boolean
+  socks_url?: string
 }
 
 export interface IInternalConfig extends IExternalConfig {
